@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Salesman Monthly Sales</title>
+</head>
+<body>
+<script>
+  let salesmanName = prompt("ENTER SALESMAN NAME:");
+  if (!salesmanName) {
+    alert("No name entered. Program will end.");
+    throw new Error("Name required");
+  }
+
+  let sales = [];
+
+  for (let month = 1; month <= 5; month++) {
+    let valid = false;
+    while (!valid) {
+      let input = prompt("SALES MAN NAME: " + salesmanName + "\nInput month " + month + " sales:");
+      let amount = parseFloat(input);
+
+      if (!isNaN(amount) && amount >= 0) {
+        sales.push(amount);
+        valid = true;
+      } else {
+        alert("Invalid sales amount for month " + month + "!");
+      }
+    }
+  }
+
+  alert("==RECORDING MONTHLY SALES FOR " + salesmanName + " ENDS HERE==");
+
+  let maxSale = Math.max(...sales);
+  let minSale = Math.min(...sales);
+
+  let maxMonths = [];
+  let minMonths = [];
+  sales.forEach((val, i) => {
+    if (val === maxSale) maxMonths.push(i + 1);
+    if (val === minSale) minMonths.push(i + 1);
+  });
+
+  document.write("<h2 style='color:red;'>SALES</h2>");
+  document.write("<h3>SALES MAN DETAILS</h3>");
+  document.write("SALES MAN NAME: " + salesmanName + "<br><br>");
+  document.write("<b>MONTHLY SALES:</b><br>");
+  for (let i = 0; i < sales.length; i++) {
+    document.write("Month " + (i + 1) + ": " + sales[i] + "<br>");
+  }
+  document.write("<br><b>HIGHEST SALE:</b> " + maxSale + "<br>");
+  maxMonths.forEach(m => document.write("Month " + m + "<br>"));
+  document.write("<br><b>LOWEST SALE:</b> " + minSale + "<br>");
+  minMonths.forEach(m => document.write("Month " + m + "<br>"));
+</script>
+</body>
+</html>
